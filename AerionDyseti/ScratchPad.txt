@@ -1,0 +1,65 @@
+﻿// This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            //// TODO: Pull all of these from Configuration (loaded from Environment Vars or User Secrets)
+            //var dbConnectionString = "Server=aeriondyseti.com;Database=ad-api;Uid=ad-api;Pwd=company|LISTEN|silver|SOLDIERS;";
+            //var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Hack.The.Planet"));
+            //var jwtIssuer = "http://localhost:3000";
+            //var jwtAudience = "http://localhost:3000";
+
+            //// Add Identity Service and set it to use EF Context.
+            //services.AddIdentity<AerionDysetiUser, IdentityRole>()
+            //        .AddEntityFrameworkStores<AerionDysetiContext>();
+
+            //// Add Authentication Services, using JWT Bearer.
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //.AddJwtBearer(options =>
+            //{
+            //    options.RequireHttpsMetadata = false;
+            //    options.SaveToken = true;
+            //    options.TokenValidationParameters = new TokenValidationParameters()
+            //    {
+            //        ValidIssuer = jwtIssuer,
+            //        ValidAudience = jwtAudience,
+            //        IssuerSigningKey = signingKey
+            //    };
+
+            //});
+
+            // Setup MVC and ensure all routes require authentication by default. Ignore null values when serializing.
+            services.AddMvc(config =>
+            {
+                //var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                //config.Filters.Add(new AuthorizeFilter(policy));
+            });
+            //.AddJsonOptions(opt =>
+            //{
+            //    opt.SerializerSettings.Formatting = Formatting.Indented;
+            //    opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+            //});
+
+            // Add EF Context Service.
+            services.AddDbContext<AerionDysetiContext>(options =>
+            {
+                options.UseInMemoryDatabase("AerionDyseti");
+                // options.UseMySql(dbConnectionString);
+            });
+
+        }
+
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            // app.UseAuthentication();
+            app.UseMvc();
+        }
