@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AerionDyseti.Extensions
 {
@@ -10,8 +7,7 @@ namespace AerionDyseti.Extensions
         public static string ToUnixTimestamp(this DateTime d)
         {
             var epoch = d - new DateTime(1970, 1, 1, 0, 0, 0);
-            return ((int)epoch.TotalSeconds).ToString();
+            return ((int) epoch.TotalSeconds).ToString();
         }
-
     }
 }

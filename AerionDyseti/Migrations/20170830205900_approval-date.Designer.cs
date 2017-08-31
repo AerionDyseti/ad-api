@@ -11,9 +11,10 @@ using System;
 namespace AerionDyseti.Migrations
 {
     [DbContext(typeof(AerionDysetiContext))]
-    partial class AerionDysetiContextModelSnapshot : ModelSnapshot
+    [Migration("20170830205900_approval-date")]
+    partial class approvaldate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

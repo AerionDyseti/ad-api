@@ -1,13 +1,13 @@
-﻿using AerionDyseti.Auth.Models;
+﻿using System.Threading.Tasks;
+using AerionDyseti.API.Shared.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 
 namespace AerionDyseti.Extensions
 {
     public static class SignInManagerExtensions
     {
-
-        public static async Task<SignInResult> CheckPasswordSignIn(this SignInManager<AerionDysetiUser> mgr, AerionDysetiUser user, string password)
+        public static async Task<SignInResult> CheckPasswordSignIn(this SignInManager<AerionDysetiUser> mgr,
+            AerionDysetiUser user, string password)
         {
             return await mgr.CheckPasswordSignInAsync(user, password, false);
         }
@@ -16,6 +16,5 @@ namespace AerionDyseti.Extensions
         {
             await mgr.SignInAsync(user, false);
         }
-
     }
 }
